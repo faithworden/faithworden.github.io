@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="THIS IS YOUR NAME">
+<meta name="author" content="Faith Worden">
 <meta name="dcterms.date" content="2023-11-11">
 
 <title>Faith Worden’s Sports Data Blog - Is this year’s Nebraska volleyball team keeping pace as national championship winners?</title>
@@ -137,11 +137,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">CHANGE THIS TO BE THE TITLE OF YOUR POST</h1>
+      <h1 class="title">Is this year’s Nebraska volleyball team keeping pace as national championship winners?</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">lowercaseword</div>
-                <div class="quarto-category">lowercaseword</div>
-                <div class="quarto-category">lowercaseword</div>
+                <div class="quarto-category">sports</div>
+                <div class="quarto-category">data</div>
+                <div class="quarto-category">code</div>
               </div>
                   </div>
   </div>
@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>THIS IS YOUR NAME </p>
+               <p>Faith Worden </p>
             </div>
     </div>
       
@@ -177,352 +177,193 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>copy and paste code here</p>
-<p>Chart 1</p>
+<p>Nebraska fans have been blessed with years of being a successful volleyball team. Being one of the most decorated volleyball programs in the country, the Huskers have gone on to win five national titles and have finished as runner-up five different times as well. Their first championship was under Terry Pettit, the Huskers’ second-ever head coach. Then, there came John Cook, who has been with the Big Red now for 23 years.</p>
+<p>The last time that Nebraska won a title was in their 2017-2018 season, with key players such as Kelly Hunter, Briana Holman and Mikaela Foecke. Their roster consisted of four seniors, four juniors, one sophomore, and six freshmen. In their starting lineup this season, it consists of no seniors, five juniors, four sophomores, and five freshmen. They’ve got a young squad, and several of these freshmen, such as Andi Jackson, Bergen Reilly, and Harper Murray are regular starters who have been making a huge impact on the team.</p>
+<p>Being six years since the Huskers have won a national title, Nebraska fans are on edge to see if this season could be the season for that. With a win against formerly No.1 Wisconsin, bringing them to the top, the Big Red have remained undefeated so far. My goal is to look into if Nebraska this season is competing at the same level, if not better, as the 2017-2018 national championship-winning squad, and compare how these young, fresh Husker players this season are comparing to seniors from 2017.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.2     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.3     ✔ tibble    3.2.1
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Registered S3 methods overwritten by 'ggalt':
-  method                  from   
-  grid.draw.absoluteGrob  ggplot2
-  grobHeight.absoluteGrob ggplot2
-  grobWidth.absoluteGrob  ggplot2
-  grobX.absoluteGrob      ggplot2
-  grobY.absoluteGrob      ggplot2</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbump)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>assists2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'totalassists2017.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 150 Columns: 7
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): Player, Cl, Ht, Pos
-dbl (2): Rank, S
-num (1): Assists
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>assistsclean2017 <span class="ot">&lt;-</span> assists2017 <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(FL)"</span>, <span class="st">"FL"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(NY)"</span>, <span class="st">"NY"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(PA)"</span>, <span class="st">"PA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"School"</span>, <span class="st">"Conference"</span>), <span class="at">sep=</span><span class="st">"</span><span class="sc">\\</span><span class="st">("</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">")"</span>, <span class="st">""</span>, Conference))</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>assistsperset2017 <span class="ot">&lt;-</span> assistsclean2017 <span class="sc">|&gt;</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AssistsPerSet =</span> Assists<span class="sc">/</span>S)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>kh <span class="ot">&lt;-</span> assistsperset2017 <span class="sc">|&gt;</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Kelly Hunter"</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>assists2023 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'totalassists2023.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 150 Columns: 7
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): Player, Cl, Ht, Pos
-dbl (2): Rank, S
-num (1): Assists
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a> assistsclean2023 <span class="ot">&lt;-</span> assists2023 <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(FL)"</span>, <span class="st">"FL"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(NY)"</span>, <span class="st">"NY"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(PA)"</span>, <span class="st">"PA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"School"</span>, <span class="st">"Conference"</span>), <span class="at">sep=</span><span class="st">"</span><span class="sc">\\</span><span class="st">("</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">")"</span>, <span class="st">""</span>, Conference))</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>assistsperset2023 <span class="ot">&lt;-</span> assistsclean2023 <span class="sc">|&gt;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AssistsPerSet =</span> Assists<span class="sc">/</span>S)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>br <span class="ot">&lt;-</span> assistsperset2023 <span class="sc">|&gt;</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Bergen Reilly"</span>)</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>assistsperset2017, <span class="fu">aes</span>(<span class="at">x=</span>S, <span class="at">y=</span>AssistsPerSet), <span class="at">color=</span><span class="st">"dark grey"</span>) <span class="sc">+</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">data=</span>assistsperset2023, <span class="fu">aes</span>(<span class="at">x=</span>S, <span class="at">y=</span>AssistsPerSet), <span class="at">color=</span><span class="st">"light grey"</span>) <span class="sc">+</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>br, <span class="fu">aes</span>(<span class="at">x=</span>S, <span class="at">y=</span>AssistsPerSet), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>kh, <span class="fu">aes</span>(<span class="at">x=</span>S, <span class="at">y=</span>AssistsPerSet), <span class="at">color=</span><span class="st">"maroon"</span>) <span class="sc">+</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_text</span>(<span class="at">data=</span>br, <span class="fu">aes</span>(<span class="at">x=</span>S<span class="fl">-.09</span>, <span class="at">y=</span>AssistsPerSet<span class="dv">-1</span>, <span class="at">label=</span>Player)) <span class="sc">+</span> </span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>kh, <span class="fu">aes</span>(<span class="at">x=</span>S<span class="fl">-.9</span>, <span class="at">y=</span>AssistsPerSet<span class="dv">-1</span>, <span class="at">label=</span>Player)) <span class="sc">+</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_encircle</span>(<span class="at">data=</span>br, <span class="fu">aes</span>(<span class="at">x=</span>S<span class="fl">-.9</span>, <span class="at">y=</span>AssistsPerSet<span class="dv">-0</span>), <span class="at">s_shape=</span>.<span class="dv">1</span>, <span class="at">expand=</span><span class="sc">-</span>.<span class="dv">04</span>, <span class="at">colour=</span><span class="st">"red"</span>) <span class="sc">+</span> </span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_encircle</span>(<span class="at">data=</span>kh,  <span class="fu">aes</span>(<span class="at">x=</span>S<span class="fl">-.3</span>, <span class="at">y=</span>AssistsPerSet<span class="dv">-0</span>), <span class="at">s_shape=</span>.<span class="dv">1</span>, <span class="at">expand=</span><span class="sc">-</span>.<span class="dv">05</span>, <span class="at">colour=</span><span class="st">"maroon"</span>) <span class="sc">+</span> </span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Sets"</span>, <span class="at">y=</span><span class="st">"Assists per set"</span>, <span class="at">title=</span><span class="st">"Is freshman Bergen Reilly keeping pace with a national championship winning setter?"</span>, <span class="at">subtitle=</span><span class="st">"During the 2017-18 championship winning Husker volleyball era, setter Kelly Hunter was a senior. </span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="st">Now, freshman Bergen Reilly is keeping up with her pace at that time when it comes to assists per set."</span>,  <span class="at">caption=</span><span class="st">"Source: NCAA | By Faith Worden"</span>) <span class="sc">+</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span> () <span class="sc">+</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">7.5</span>), </span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">8.5</span>), </span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalt)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbeeswarm)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggbump)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>assists2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'totalassists2017.csv'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>assistsclean2017 <span class="ot">&lt;-</span> assists2017 <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(FL)"</span>, <span class="st">"FL"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(NY)"</span>, <span class="st">"NY"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(PA)"</span>, <span class="st">"PA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"School"</span>, <span class="st">"Conference"</span>), <span class="at">sep=</span><span class="st">"</span><span class="sc">\\</span><span class="st">("</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">")"</span>, <span class="st">""</span>, Conference))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>assistsperset2017 <span class="ot">&lt;-</span> assistsclean2017 <span class="sc">|&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AssistsPerSet =</span> Assists<span class="sc">/</span>S)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>kh <span class="ot">&lt;-</span> assistsperset2017 <span class="sc">|&gt;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Kelly Hunter"</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>assists2023 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'totalassists2023.csv'</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> assistsclean2023 <span class="ot">&lt;-</span> assists2023 <span class="sc">|&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(FL)"</span>, <span class="st">"FL"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(NY)"</span>, <span class="st">"NY"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(PA)"</span>, <span class="st">"PA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"School"</span>, <span class="st">"Conference"</span>), <span class="at">sep=</span><span class="st">"</span><span class="sc">\\</span><span class="st">("</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">")"</span>, <span class="st">""</span>, Conference))</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>assistsperset2023 <span class="ot">&lt;-</span> assistsclean2023 <span class="sc">|&gt;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">AssistsPerSet =</span> Assists<span class="sc">/</span>S)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>br <span class="ot">&lt;-</span> assistsperset2023 <span class="sc">|&gt;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Bergen Reilly"</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>assistsperset2017, <span class="fu">aes</span>(<span class="at">x=</span>S, <span class="at">y=</span>AssistsPerSet), <span class="at">color=</span><span class="st">"dark grey"</span>) <span class="sc">+</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>(<span class="at">data=</span>assistsperset2023, <span class="fu">aes</span>(<span class="at">x=</span>S, <span class="at">y=</span>AssistsPerSet), <span class="at">color=</span><span class="st">"light grey"</span>) <span class="sc">+</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>br, <span class="fu">aes</span>(<span class="at">x=</span>S, <span class="at">y=</span>AssistsPerSet), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>kh, <span class="fu">aes</span>(<span class="at">x=</span>S, <span class="at">y=</span>AssistsPerSet), <span class="at">color=</span><span class="st">"maroon"</span>) <span class="sc">+</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_text</span>(<span class="at">data=</span>br, <span class="fu">aes</span>(<span class="at">x=</span>S<span class="fl">-.09</span>, <span class="at">y=</span>AssistsPerSet<span class="dv">-1</span>, <span class="at">label=</span>Player)) <span class="sc">+</span> </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data=</span>kh, <span class="fu">aes</span>(<span class="at">x=</span>S<span class="fl">-.9</span>, <span class="at">y=</span>AssistsPerSet<span class="dv">-1</span>, <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_encircle</span>(<span class="at">data=</span>br, <span class="fu">aes</span>(<span class="at">x=</span>S<span class="fl">-.9</span>, <span class="at">y=</span>AssistsPerSet<span class="dv">-0</span>), <span class="at">s_shape=</span>.<span class="dv">1</span>, <span class="at">expand=</span><span class="sc">-</span>.<span class="dv">04</span>, <span class="at">colour=</span><span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_encircle</span>(<span class="at">data=</span>kh,  <span class="fu">aes</span>(<span class="at">x=</span>S<span class="fl">-.3</span>, <span class="at">y=</span>AssistsPerSet<span class="dv">-0</span>), <span class="at">s_shape=</span>.<span class="dv">1</span>, <span class="at">expand=</span><span class="sc">-</span>.<span class="dv">05</span>, <span class="at">colour=</span><span class="st">"maroon"</span>) <span class="sc">+</span> </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Sets"</span>, <span class="at">y=</span><span class="st">"Assists per set"</span>, <span class="at">title=</span><span class="st">"Is freshman Bergen Reilly keeping pace with a national championship winning setter?"</span>, <span class="at">subtitle=</span><span class="st">"During the 2017-18 championship winning Husker volleyball era, setter Kelly Hunter was a senior. </span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="st">Now, freshman Bergen Reilly is keeping up with her pace at that time when it comes to assists per set."</span>,  <span class="at">caption=</span><span class="st">"Source: NCAA | By Faith Worden"</span>) <span class="sc">+</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span> () <span class="sc">+</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">7.5</span>), </span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">8.5</span>), </span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>sdlkjfwlkjfdlskjdvlkjsd</p>
+<p>What’s it with this new Nebraska setter? Bergen Reilly is a freshman and is already making her way to the top. The South Dakota native joined the squad as the starting setter. From this encircling plot, I chose to show off Bergen Reilly compared to the former 2017 Husker setter and three-time Husker All-American Kelly Hunter, who is now one of the assistant coaches. Bergen Reilly is already keeping pace with a then-senior, two-time national championship-winning setter. She’s still racking up sets because the season isn’t quite up yet. But, when it comes to assists per set, Reilly is slightly behind, but overall in the same wheelhouse as Hunter, keeping at the same pace.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>hitting2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'hittingpct2017.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 150 Columns: 10
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): Player, Cl, Ht, Pos
-dbl (5): Rank, S, Kills, Errors, Pct.
-num (1): Total Attacks
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>hittingpct2017 <span class="ot">&lt;-</span> hitting2017 <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(FL)"</span>, <span class="st">"FL"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(NY)"</span>, <span class="st">"NY"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(PA)"</span>, <span class="st">"PA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(OH)"</span>, <span class="st">"OH"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(CA)"</span>, <span class="st">"CA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"School"</span>, <span class="st">"Conference"</span>), <span class="at">sep=</span><span class="st">"</span><span class="sc">\\</span><span class="st">("</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">")"</span>, <span class="st">""</span>, Conference))</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>bh <span class="ot">&lt;-</span> hittingpct2017 <span class="sc">|&gt;</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Briana Holman"</span>)</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>hitting2023 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'hittingpct2023.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 150 Columns: 10
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): Player, Cl, Ht, Pos
-dbl (6): Rank, S, Kills, Errors, Total Attacks, Pct.
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>hittingpct2023 <span class="ot">&lt;-</span> hitting2023 <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(FL)"</span>, <span class="st">"FL"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(NY)"</span>, <span class="st">"NY"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(PA)"</span>, <span class="st">"PA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(CA)"</span>, <span class="st">"CA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"School"</span>, <span class="st">"Conference"</span>), <span class="at">sep=</span><span class="st">"</span><span class="sc">\\</span><span class="st">("</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">")"</span>, <span class="st">""</span>, Conference))</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>aj <span class="ot">&lt;-</span> hittingpct2023 <span class="sc">|&gt;</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Andi Jackson"</span>)</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>hittingpct2023, </span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"light grey"</span>) <span class="sc">+</span> </span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>hittingpct2017, </span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"dark grey"</span>) <span class="sc">+</span> </span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_beeswarm</span>(</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>aj, </span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> </span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_beeswarm</span>(</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bh, </span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"maroon"</span>) <span class="sc">+</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bh, </span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>, <span class="at">label=</span>Player)) <span class="sc">+</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>aj, </span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>, <span class="at">label=</span>Player)) <span class="sc">+</span></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Hitting Pct."</span>, <span class="at">y=</span><span class="st">"Position"</span>, <span class="at">title=</span><span class="st">"Andi Jackson swings her way ahead of the rest"</span>, <span class="at">subtitle=</span><span class="st">"Freshman Andi Jackson, setter for NU, ranks at No.25 for hitting percentage this season. In 2017, Holman ended at No. 60."</span>,  <span class="at">caption=</span><span class="st">"Source: NCAA | By Faith Worden"</span>) <span class="sc">+</span></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">7.5</span>), </span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">7.5</span>), </span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>hitting2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'hittingpct2017.csv'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>hittingpct2017 <span class="ot">&lt;-</span> hitting2017 <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(FL)"</span>, <span class="st">"FL"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(NY)"</span>, <span class="st">"NY"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(PA)"</span>, <span class="st">"PA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(OH)"</span>, <span class="st">"OH"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(CA)"</span>, <span class="st">"CA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"School"</span>, <span class="st">"Conference"</span>), <span class="at">sep=</span><span class="st">"</span><span class="sc">\\</span><span class="st">("</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">")"</span>, <span class="st">""</span>, Conference))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>bh <span class="ot">&lt;-</span> hittingpct2017 <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Briana Holman"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>hitting2023 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'hittingpct2023.csv'</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>hittingpct2023 <span class="ot">&lt;-</span> hitting2023 <span class="sc">|&gt;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(Player, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"Player"</span>, <span class="st">"School"</span>), <span class="at">sep=</span><span class="st">","</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(FL)"</span>, <span class="st">"FL"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(NY)"</span>, <span class="st">"NY"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(PA)"</span>, <span class="st">"PA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">School =</span> <span class="fu">gsub</span>(<span class="st">"(CA)"</span>, <span class="st">"CA"</span>, School, <span class="at">fixed=</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(School, <span class="at">into=</span><span class="fu">c</span>(<span class="st">"School"</span>, <span class="st">"Conference"</span>), <span class="at">sep=</span><span class="st">"</span><span class="sc">\\</span><span class="st">("</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Conference=</span><span class="fu">gsub</span>(<span class="st">")"</span>, <span class="st">""</span>, Conference))</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>aj <span class="ot">&lt;-</span> hittingpct2023 <span class="sc">|&gt;</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Player <span class="sc">==</span> <span class="st">"Andi Jackson"</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>hittingpct2023, </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"light grey"</span>) <span class="sc">+</span> </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>(</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>hittingpct2017, </span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"dark grey"</span>) <span class="sc">+</span> </span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_beeswarm</span>(</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>aj, </span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_beeswarm</span>(</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bh, </span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>), <span class="at">color=</span><span class="st">"maroon"</span>) <span class="sc">+</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>bh, </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>, <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text_repel</span>(</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>aj, </span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">y=</span><span class="st">`</span><span class="at">Pos</span><span class="st">`</span>, <span class="at">label=</span>Player)) <span class="sc">+</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Hitting Pct."</span>, <span class="at">y=</span><span class="st">"Position"</span>, <span class="at">title=</span><span class="st">"Andi Jackson swings her way ahead of the rest"</span>, <span class="at">subtitle=</span><span class="st">"Freshman Andi Jackson, setter for NU, ranks at No.25 for hitting percentage this season. In 2017, Holman ended at No. 60."</span>,  <span class="at">caption=</span><span class="st">"Source: NCAA | By Faith Worden"</span>) <span class="sc">+</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">7.5</span>), </span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">7.5</span>), </span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>lkjfslkjdflskjdflksj</p>
+<p>Andi Jackson is another force to be reckoned with this season. The freshman middle blocker from Colorado has had a season-high of 13 kills in a game versus Michigan State and has consistently been a key player when it comes to blocking and kills. Now, let’s compare Jackson to Briana Holman, who in 2017 was a senior middle blocker for Nebraska. Holman had several accomplishments, such as being named with AVCA All-America and All-Big Ten honorable mention, being named as Big Ten Defensive Player of the Week, and much more. Holman was a strong force for Nebraska. Now, looking at this beeswarm plot, it shows Andi Jackson compared to Briana Holman in their respective seasons for hitting percentage. An average hitting percentage lies around the .200-.250 range, where above .300 is the goal to have an excellent hitting percentage. Holman ended at a hitting percentage of 0.358, ranking No.60 among players in the NCAA. This season for Nebraska, Jackson has a .401 hitting percentage, ranking at No.25. Everyone ahead of Jackson is sophomores, juniors, or seniors. Jackson is the first freshman you see leading in hitting percentage, but some others come ranked later on behind her. If Jackson is already swinging her way ahead of the rest in hitting percentage now as a freshman, and showing higher numbers than a senior AVCA All-America player, how good is she going to be when she’s a senior?</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>winsloss2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2017.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2017</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 333 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Team
-dbl (4): Rank, W, L, Pct.
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>winsloss2018 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2018.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2018</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 334 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Team
-dbl (4): Rank, W, L, Pct.
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>winsloss2019 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2019.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2019</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 332 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Team
-dbl (4): Rank, W, L, Pct.
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>winsloss2020 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2020.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2020</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 306 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Team
-dbl (4): Rank, W, L, Pct.
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>winsloss2021 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2021.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2021</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 332 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Team
-dbl (4): Rank, W, L, Pct.
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>winsloss2022 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2022.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2022</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 334 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Team
-dbl (4): Rank, W, L, Pct.
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>winsloss2023 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2023.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2023</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 332 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Team
-dbl (4): Rank, W, L, Pct.
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>nu2017 <span class="ot">&lt;-</span> winsloss2017 <span class="sc">|&gt;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (Team <span class="sc">==</span> <span class="st">"Nebraska (Big Ten)"</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>winsloss <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(winsloss2017, winsloss2018, winsloss2019, winsloss2020, winsloss2021, winsloss2022, winsloss2023) <span class="sc">|&gt;</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(Rank <span class="sc">&lt;=</span> <span class="dv">25</span>) </span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>nuwinsloss <span class="ot">&lt;-</span> winsloss <span class="sc">|&gt;</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Nebraska (Big Ten)"</span>)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>kentuckywinsloss <span class="ot">&lt;-</span> winsloss <span class="sc">|&gt;</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Kentucky (SEC)"</span>)</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>texaswinsloss <span class="ot">&lt;-</span> winsloss <span class="sc">|&gt;</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Texas (Big 12)"</span>)</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>winsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"light grey"</span>) <span class="sc">+</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>nuwinsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nuwinsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>kentuckywinsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"#0033A0"</span>) <span class="sc">+</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_line</span>(<span class="at">data=</span>texaswinsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"#BF5700"</span>) <span class="sc">+</span></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Season"</span>, <span class="at">y=</span><span class="st">"Win Pct."</span>, <span class="at">title=</span><span class="st">"Nebraska's on top, but hasn't always been"</span>, <span class="at">subtitle=</span><span class="st">"Nebraska, Kentucky and Texas are some of the several national championship winners in the last few years. </span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="st">But, Nebraska's looking hot this season, and is doing better as of now against championship winning teams. "</span>,  <span class="at">caption=</span><span class="st">"Source: NCAA | By Faith Worden"</span>) <span class="sc">+</span></span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), </span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">8.5</span>), </span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>winsloss2017 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2017.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2017</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>winsloss2018 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2018.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2018</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>winsloss2019 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2019.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2019</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>winsloss2020 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2020.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2020</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>winsloss2021 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2021.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2021</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>winsloss2022 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2022.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2022</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>winsloss2023 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"winsloss2023.csv"</span>) <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Season =</span> <span class="dv">2023</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>nu2017 <span class="ot">&lt;-</span> winsloss2017 <span class="sc">|&gt;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (Team <span class="sc">==</span> <span class="st">"Nebraska (Big Ten)"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>winsloss <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(winsloss2017, winsloss2018, winsloss2019, winsloss2020, winsloss2021, winsloss2022, winsloss2023) <span class="sc">|&gt;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(Rank <span class="sc">&lt;=</span> <span class="dv">25</span>) </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>nuwinsloss <span class="ot">&lt;-</span> winsloss <span class="sc">|&gt;</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Nebraska (Big Ten)"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>kentuckywinsloss <span class="ot">&lt;-</span> winsloss <span class="sc">|&gt;</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Kentucky (SEC)"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>texaswinsloss <span class="ot">&lt;-</span> winsloss <span class="sc">|&gt;</span> <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"Texas (Big 12)"</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>winsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"light grey"</span>) <span class="sc">+</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>nuwinsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data=</span>nuwinsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data=</span>kentuckywinsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"#0033A0"</span>) <span class="sc">+</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_line</span>(<span class="at">data=</span>texaswinsloss, <span class="fu">aes</span>(<span class="at">x=</span>Season, <span class="at">y=</span><span class="st">`</span><span class="at">Pct.</span><span class="st">`</span>, <span class="at">group=</span>Team), <span class="at">color=</span><span class="st">"#BF5700"</span>) <span class="sc">+</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Season"</span>, <span class="at">y=</span><span class="st">"Win Pct."</span>, <span class="at">title=</span><span class="st">"Nebraska's on top, but hasn't always been"</span>, <span class="at">subtitle=</span><span class="st">"Nebraska, Kentucky and Texas are some of the several national championship winners in the last few years. </span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="st">But, Nebraska's looking hot this season, and is doing better as of now against championship winning teams. "</span>,  <span class="at">caption=</span><span class="st">"Source: NCAA | By Faith Worden"</span>) <span class="sc">+</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>), </span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="fl">8.5</span>), </span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Lastly, this line chart shows the win percentage from the 2017 season until now, which also highlights some competitors who have also been national championship winners in the past few years as well. That highlights Kentucky and Texas. The Longhorns won the championship last season, and the last time Kentucky won was in 2020. The Huskers this season are on top of everyone, but that wasn’t how it always was. The 2017 Husker national championship-winning team choked against teams like Wisconsin, Florida and Oregon. Their first loss was in the beginning of October, giving them a win streak of 19 games before they lost to the Badgers. This year, the Huskers took a win against Wisconsin, giving them their first win against them in 10 matches. Nebraska has yet to lose this season, they are 24-0.</p>
+<p>If Nebraska is competing at similar levels, if not higher than the last championship-winning team, could Nebraska pull through and win the championship this year? Also, comparing 2017 seniors to freshmen now, how good are these freshmen such as Reilly and Jackson going to be when they are putting up the same levels now as championship-winning, decorated former players. Overall, Nebraska is keeping at the same pace as national championship winners and are putting up impressive numbers. Now, can they get to the championship this season?</p>
 
 
 
